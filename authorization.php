@@ -7,7 +7,7 @@ $error = '';
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['auth'])) {
 
     $login = trim($_POST['login']);
-    $password = trim($_POST['password']);
+    $password = trim($_POST['password']);//использую не хешированный пароль потому что не делал авторизацию
 
     if (empty($login)) {
         $error .= '<p class="error">Введите логин.</p>';
