@@ -4,7 +4,6 @@ $type = $_SESSION["type"];
 $visible = "";
 // проверяем авторизован пользователь или нет, для гостя скрываем кнопки добавить и редактировать
 if($type == "guest"){
-	$visible = "hidden";
 	echo '<style>.button{visibility : hidden;}</style>';
 }
 //получаем данные со всеми постами
@@ -39,6 +38,9 @@ if ($res -> num_rows > 0) {
         </table>';
     }
 }
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["exit"])){
+    session_destroy();
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +52,10 @@ if ($res -> num_rows > 0) {
 	 
      <div>
 	 <form action="post_data.php"  method="post" class="button">
-            <input <?php echo $visible;?> type="submit" value="Добавить" name="add" />
+            <input  type="submit" value="Добавить" name="add" />
+	</form>
+    <form action = "authorization.php"  method="post">
+            <input  type="submit" value="Выход" name="exit" />
 	</form>
      </div>
 
